@@ -1,0 +1,8 @@
+applications:
+- name: studentip
+  memory: 256M
+  instances: 1
+  host: studentip
+  domain: mybluemix.net
+  path: .
+  command: node server.js
