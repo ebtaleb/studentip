@@ -5,4 +5,4 @@ applications:
   host: studentip
   domain: mybluemix.net
   path: .
-  command: node server.js
+  command: node bin/www
