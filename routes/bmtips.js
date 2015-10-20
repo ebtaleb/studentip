@@ -1,19 +1,7 @@
 var mongodb = require('mongodb');
+var mongo = require('./mdb_cred');
 
-if (process.env.VCAP_SERVICES) {
-    var env = JSON.parse(process.env.VCAP_SERVICES);
-    if (env['mongolab']) {
-        var mongo = env['mongolab'][0]['credentials'];
-    }
-} else {
-    var mongo = {
-        "username" : "user1",
-        "password" : "secret",
-        "uri" : "mongodb://localhost:27017/test"
-    }
-}
-
-var mdb_client = require('mongodb').MongoClient;
+var mdb_client = mongodb.MongoClient;
 
 mdb_client.connect (mongo.uri, function(err, db) {
     if(!err) {
