@@ -43,6 +43,6 @@ passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 // mongoose
-mongoose.connect(mongo.uri);
+mongoose.connect(mongo.url);
 
 module.exports = app;

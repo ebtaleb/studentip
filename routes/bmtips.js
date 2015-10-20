@@ -4,7 +4,7 @@ var mongo = require('./mdb_cred');
 var mdb_client = mongodb.MongoClient;
 var BSON = mongodb.BSONPure;
 
-mdb_client.connect (mongo.uri, function(err, db) {
+mdb_client.connect (mongo.url, function(err, db) {
     if(!err) {
         console.log("We are connected to DB");
     }
@@ -27,7 +27,7 @@ mdb_client.connect (mongo.uri, function(err, db) {
 
 
 exports.findById = function(req, res) {
-    mdb_client.connect (mongo.uri, function(err, db)   {
+    mdb_client.connect (mongo.url, function(err, db)   {
         if(!err) {
             console.log("We are connected to DB");
         }
@@ -47,7 +47,7 @@ exports.findById = function(req, res) {
 
 exports.findAll = function(req, res) {
 
-    mdb_client.connect (mongo.uri, function(err, db)   {
+    mdb_client.connect (mongo.url, function(err, db)   {
         if(!err) {
             console.log("We are connected to DB");
         }
@@ -65,7 +65,7 @@ exports.findAll = function(req, res) {
 
 exports.addWine = function(req, res) {
 
-    mdb_client.connect (mongo.uri, function(err, db)   {
+    mdb_client.connect (mongo.url, function(err, db)   {
         if(!err) {
             console.log("We are connected to DB");
         }
@@ -90,7 +90,7 @@ exports.addWine = function(req, res) {
 
 exports.updateWine = function(req, res) {
 
-    mdb_client.connect (mongo.uri, function(err, db)   {
+    mdb_client.connect (mongo.url, function(err, db)   {
         if(!err) {
             console.log("We are connected to DB");
         }
@@ -118,7 +118,7 @@ exports.updateWine = function(req, res) {
 
 exports.deleteWine = function(req, res) {
 
-    mdb_client.connect (mongo.uri, function(err, db)   {
+    mdb_client.connect (mongo.url, function(err, db)   {
         if(!err) {
             console.log("We are connected to DB");
         }
@@ -166,7 +166,7 @@ var populateDB = function() {
         picture: "lan_rioja.jpg"
     }];
 
-    mdb_client.connect (mongo.uri, function(err, db)   {
+    mdb_client.connect (mongo.url, function(err, db)   {
         if(!err) {
             console.log("We are connected to DB");
         }
