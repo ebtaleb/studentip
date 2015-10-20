@@ -2,6 +2,7 @@ var mongodb = require('mongodb');
 var mongo = require('./mdb_cred');
 
 var mdb_client = mongodb.MongoClient;
+var BSON = mongodb.BSONPure;
 
 mdb_client.connect (mongo.uri, function(err, db) {
     if(!err) {

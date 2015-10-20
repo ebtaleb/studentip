@@ -11,6 +11,8 @@ var bodyParser = require('body-parser');
 var wineController = require('./routes/rest');
 var routes = require('./routes/index');
 
+var mongo = require('./routes/mdb_cred');
+
 var app = express();
 
 // view engine setup
@@ -41,6 +43,6 @@ passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 // mongoose
-mongoose.connect('mongodb://localhost/users');
+mongoose.connect(mongo.uri);
 
 module.exports = app;
