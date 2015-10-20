@@ -31,10 +31,16 @@ html.no-js(lang='')
             span.icon-bar
           a.navbar-brand(href='#') Studentip
         #navbar.navbar-collapse.collapse
-          form.navbar-form.navbar-right(role='form')
-            .form-group
-              input.form-control(type='text', placeholder='Identifiant')
-            .form-group
-              input.form-control(type='password', placeholder='Mot de passe')
-            button.btn.btn-success(type='submit') Se connecter
+          if (!user)
+            form.navbar-form.navbar-right(role='form', action="/login", method="post")
+              .form-group
+                input.form-control(type='text', name="username", placeholder='Identifiant')
+              .form-group
+                input.form-control(type='password', name="password", placeholder='Mot de passe')
+              button.btn.btn-success(type='submit') Se connecter
+          if (user)
+            .navbar-right
+              a.navbar-brand You are currently logged in as #{user.username}
+              a.navbar-brand(href="/logout") Logout
+
     block content
