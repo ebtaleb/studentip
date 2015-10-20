@@ -5,12 +5,8 @@ var Account = require('../models/account');
 var router = express.Router();
 
 router.get('/', function (req, res) {
-    res.sendFile('index.html');
+    res.render('index', { user : req.user });
 });
-
-//router.get('/', function (req, res) {
-    //res.render('index', { user : req.user });
-//});
 
 router.get('/register', function(req, res) {
     res.render('register', { });
