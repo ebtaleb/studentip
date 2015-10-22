@@ -14,10 +14,10 @@ mdb_client.connect (mongo.url, function(err, db) {
 
     db.open(function(err, db) {
         if(!err) {
-            console.log("Connected to 'winedb' database");
-            db.collection('wines', {strict:true}, function(err, collection) {
+            console.log("Connected to 'tipdb' database");
+            db.collection('tips', {strict:true}, function(err, collection) {
                 if (err) {
-                    console.log("The 'wines' collection doesn't exist. Creating it with sample data...");
+                    console.log("The 'tips' collection doesn't exist. Creating it with sample data...");
                     populateDB();
                 }
             });
@@ -36,8 +36,8 @@ exports.findById = function(req, res) {
         }
 
         var id = req.params.id;
-        console.log('Retrieving wine: ' + id);
-        db.collection('wines', function(err, collection) {
+        console.log('Retrieving tip: ' + id);
+        db.collection('tips', function(err, collection) {
             collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, item) {
                 res.send(item);
             });
@@ -55,7 +55,7 @@ exports.findAll = function(req, res) {
             console.dir(err);
         }
 
-        db.collection('wines', function(err, collection) {
+        db.collection('tips', function(err, collection) {
             collection.find().toArray(function(err, items) {
                 res.send(items);
             });
@@ -63,7 +63,7 @@ exports.findAll = function(req, res) {
     });
 };
 
-exports.addWine = function(req, res) {
+exports.addTip = function(req, res) {
 
     mdb_client.connect (mongo.url, function(err, db)   {
         if(!err) {
@@ -74,8 +74,8 @@ exports.addWine = function(req, res) {
         }
 
         var wine = req.body;
-        console.log('Adding wine: ' + JSON.stringify(wine));
-        db.collection('wines', function(err, collection) {
+        console.log('Adding tip: ' + JSON.stringify(wine));
+        db.collection('tips', function(err, collection) {
             collection.insert(wine, {safe:true}, function(err, result) {
                 if (err) {
                     res.send({'error':'An error has occurred'});
@@ -88,7 +88,7 @@ exports.addWine = function(req, res) {
     });
 }
 
-exports.updateWine = function(req, res) {
+exports.updateTip = function(req, res) {
 
     mdb_client.connect (mongo.url, function(err, db)   {
         if(!err) {
@@ -99,24 +99,24 @@ exports.updateWine = function(req, res) {
         }
 
         var id = req.params.id;
-        var wine = req.body;
-        console.log('Updating wine: ' + id);
-        console.log(JSON.stringify(wine));
-        db.collection('wines', function(err, collection) {
-            collection.update({'_id':new BSON.ObjectID(id)}, wine, {safe:true}, function(err, result) {
+        var tip = req.body;
+        console.log('Updating tip: ' + id);
+        console.log(JSON.stringify(tip));
+        db.collection('tips', function(err, collection) {
+            collection.update({'_id':new BSON.ObjectID(id)}, tip, {safe:true}, function(err, result) {
                 if (err) {
-                    console.log('Error updating wine: ' + err);
+                    console.log('Error updating tip: ' + err);
                     res.send({'error':'An error has occurred'});
                 } else {
                     console.log('' + result + ' document(s) updated');
-                    res.send(wine);
+                    res.send(tip);
                 }
             });
         });
     });
 }
 
-exports.deleteWine = function(req, res) {
+exports.deleteTip = function(req, res) {
 
     mdb_client.connect (mongo.url, function(err, db)   {
         if(!err) {
@@ -127,8 +127,8 @@ exports.deleteWine = function(req, res) {
         }
 
         var id = req.params.id;
-        console.log('Deleting wine: ' + id);
-        db.collection('wines', function(err, collection) {
+        console.log('Deleting tip: ' + id);
+        db.collection('tips', function(err, collection) {
             collection.remove({'_id':new BSON.ObjectID(id)}, {safe:true}, function(err, result) {
                 if (err) {
                     res.send({'error':'An error has occurred - ' + err});
@@ -146,24 +146,14 @@ exports.deleteWine = function(req, res) {
 // You'd typically not find this code in a real-life app, since the database would already exist.
 var populateDB = function() {
 
-    var wines = [
+    var tips = [
     {
-        name: "CHATEAU DE SAINT COSME",
-        year: "2009",
-        grapes: "Grenache / Syrah",
-        country: "France",
-        region: "Southern Rhone",
-        description: "The aromas of fruit and spice...",
-        picture: "saint_cosme.jpg"
+        content: "CHATEAU DE SAINT COSME",
+        user: "2009"
     },
     {
-        name: "LAN RIOJA CRIANZA",
-        year: "2006",
-        grapes: "Tempranillo",
-        country: "Spain",
-        region: "Rioja",
-        description: "A resurgence of interest in boutique vineyards...",
-        picture: "lan_rioja.jpg"
+        content: "LAN RIOJA CRIANZA",
+        user: "2006"
     }];
 
     mdb_client.connect (mongo.url, function(err, db)   {
@@ -174,8 +164,8 @@ var populateDB = function() {
             console.dir(err);
         }
 
-        db.collection('wines', function(err, collection) {
-            collection.insert(wines, {safe:true}, function(err, result) {});
+        db.collection('tips', function(err, collection) {
+            collection.insert(tips, {safe:true}, function(err, result) {});
         });
     });
 };

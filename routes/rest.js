@@ -1,12 +1,12 @@
 var express = require('express');
-var wine = require('./bmtips');
+var tips = require('./tips');
 
 var router = express.Router();
 
-router.get('/wines', wine.findAll);
-router.get('/wines/:id', wine.findById);
-router.post('/wines', wine.addWine);
-router.put('/wines/:id', wine.updateWine);
-router.delete('/wines/:id', wine.deleteWine);
+router.get('/tips', tips.findAll);
+router.get('/tips/:id', tips.findById);
+router.post('/tips', tips.addTip);
+router.put('/tips/:id', tips.updateTip);
+router.delete('/tips/:id', tips.deleteTip);
 
 module.exports = router;

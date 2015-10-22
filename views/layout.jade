@@ -14,6 +14,7 @@ html.no-js(lang='')
       }
     link(rel='stylesheet', href='css/bootstrap-theme.min.css')
     link(rel='stylesheet', href='css/main.css')
+    link(rel='stylesheet', href='css/bubble.css')
     script(src='js/vendor/modernizr-2.8.3.min.js')
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
     script.
@@ -29,7 +30,7 @@ html.no-js(lang='')
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='#') Studentip
+          a.navbar-brand(href='/') Studentip
         #navbar.navbar-collapse.collapse
           if (!user)
             form.navbar-form.navbar-right(role='form', action="/login", method="post")
