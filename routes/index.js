@@ -4,6 +4,22 @@ var Account = require('../models/account');
 
 var router = express.Router();
 
+function notLoggedIn(req, res, next) {
+    if (req.user) {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+}
+
+function loggedIn(req, res, next) {
+    if (req.user) {
+        res.redirect('/home');
+    } else {
+        next();
+    }
+}
+
 router.get('/', function (req, res) {
     res.render('index', { user : req.user });
 });
@@ -19,26 +35,30 @@ router.post('/register', function(req, res) {
         }
 
         passport.authenticate('local')(req, res, function () {
-            res.redirect('/');
+            res.redirect('/home');
         });
     });
 });
 
-router.get('/login', function(req, res) {
+router.get('/login', loggedIn, function(req, res) {
     res.render('login', { user : req.user });
 });
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
-    res.redirect('/');
+    res.redirect('/home');
+});
+
+router.get('/home', notLoggedIn, function (req, res) {
+    res.render('home', { user : req.user });
+});
+
+router.get('/profile', notLoggedIn, function (req, res) {
+    res.render('profile', { user : req.user });
 });
 
 router.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
-});
-
-router.get('/ping', function(req, res){
-    res.status(200).send("pong!");
 });
 
 module.exports = router;
