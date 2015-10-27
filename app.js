@@ -8,7 +8,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var wineController = require('./routes/rest');
+var restAPIController = require('./routes/rest');
 var routes = require('./routes/index');
 
 var mongo = require('./routes/mdb_cred');
@@ -34,7 +34,7 @@ app.use(passport.session());
 app.use(require('express').static(__dirname + '/public'));
 
 app.use('/', routes);
-app.use('/api', wineController);
+app.use('/api', restAPIController);
 
 // passport config
 var Account = require('./models/account');

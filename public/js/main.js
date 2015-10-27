@@ -1,19 +1,7 @@
-//window.onload = function() {
-    //$.ajax({
-        //type: "GET",
-        //url: "api/tips",
-        //dataType: "json",
-        //success: function(data) {
-            //$.each(data, function (key, item) {
-                //newdiv = document.createElement("div");
-                //newdiv.className = "tip";
-                //newdiv.innerHTML = item.content + " by " + item.user;
-                //$(".container.new-tips").append(newdiv);
-            //});
-        //}
-    //});
-//};
+
 var createBubble = function(item) {
+
+    test = [{'user' : 'derp', 'content' : 'people die when they are killed', 'date' : 'on 23 Oct', imgsrc : "http://lorempixel.com/50/50/people/6"}];
 
     newdiv = document.createElement("div");
     newdiv.className = "tip";
@@ -24,10 +12,10 @@ var createBubble = function(item) {
     newdiv.appendChild(newquote);
 
     p_user = document.createElement("p");
-    p_user.innerHTML = item.user;
+    p_user.innerHTML = item.owner + " - " + Date(item.creation_date).toLocaleString();
     newdiv.appendChild(p_user);
 
-    return newdiv
+    return newdiv;
 };
 
 $(document).ready(function () {

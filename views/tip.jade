@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  .container
+    h2 #{tip.owner}
+    h2 #{tip.content}
+    h2 #{Date(tip.creation_date).toLocaleString()}

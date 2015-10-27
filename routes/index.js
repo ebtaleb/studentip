@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var Account = require('../models/account');
+var http = require('http');
 
 var router = express.Router();
 
@@ -22,6 +23,24 @@ function loggedIn(req, res, next) {
 
 router.get('/', function (req, res) {
     res.render('index', { user : req.user });
+});
+
+router.get('/:id', function (req, res) {
+    http.get("http://" + req.headers.host + "/api/tips/" + req.params.id, function(output) {
+        console.log("Got response: " + output.statusCode);
+        str = "";
+        output.on('data', function (chunk) {
+            str += chunk;
+        });
+
+        output.on('end', function () {
+            ok = JSON.parse(str);
+            console.log(ok);
+            res.render('tip', { user : req.user, tip : ok });
+        });
+    }).on('error', function(e) {
+        console.log("Got error: " + e.message);
+    });
 });
 
 router.get('/register', function(req, res) {
