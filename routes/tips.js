@@ -2,6 +2,12 @@ var mongoose = require('mongoose');
 var mongo = require('./mdb_cred');
 var shortid = require('shortid');
 
+var CommentSchema = new mongoose.Schema({
+    content : String,
+    owner: String,
+    creation_date: {type: Date, default: Date.now}
+});
+
 var TipSchema = new mongoose.Schema({
     _id: {
         type: String,
@@ -10,7 +16,8 @@ var TipSchema = new mongoose.Schema({
     },
     owner: String,
     content: String,
-    creation_date: {type: Date, default: Date.now}
+    creation_date: {type: Date, default: Date.now},
+    comments: [CommentSchema]
 });
 
 var Tips = mongoose.model('Tips', TipSchema);
@@ -48,7 +55,26 @@ exports.addTip = function(req, res) {
     });
 };
 
+exports.addComment = function(req, res) {
+    console.log(req.body);
+    Tips.update({ _id: req.params.id }, { $push : {"comments" : req.body} }, function(err, result) {
+        if (err) {
+            res.send({'error':'An error has occurred - ' + err});
+        } else {
+            res.json({"url" : result._id, "comment_update" : "success"});
+        }
+    });
+};
+
 exports.updateTip = function(req, res) {
+    Tips.update({_id: req.params.id}, {content : req.body.content}, function(err, result) {
+        if (err) {
+            res.send({'error':'An error has occurred - ' + err});
+        } else {
+            console.log('Success: ' + result._id + " updated");
+            res.json({"url" : result._id, "update" : "success"});
+        }
+    });
 };
 
 exports.deleteTip = function(req, res) {

@@ -1,7 +1,15 @@
 extends layout
 
 block content
-  .container
+  script(type='text/javascript', src='js/comment.js')
+  script(type='text/javascript').
+    var tip = !{JSON.stringify(tip)};
+    var owner = tip.owner
+    var content = tip.content
+    var date = tip.creation_date
+    $(document).on("ready", function() { $(".comments").append(addCommentBox(tip.comments)); })
+
+  .comments
     h2 #{tip.owner}
     h2 #{tip.content}
-    h2 #{Date(tip.creation_date).toLocaleString()}
+    h2 #{tip.creation_date}

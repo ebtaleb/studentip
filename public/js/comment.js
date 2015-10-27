@@ -71,10 +71,10 @@ var addCommentBox = function(comments) {
     commentsdiv.className = "commentList";
 
     for (i = 0; i < comments.length; i++) {
-        newcomment = createComment(comments[i].user, 
+        newcomment = createComment(comments[i].owner, 
                                    comments[i].content,
-                                   comments[i].date,
-                                   comments[i].imgsrc);
+                                   comments[i].creation_date,
+                                   "http://lorempixel.com/50/50/people/9");
         commentsdiv.appendChild(newcomment);
         // create comments boxes from array and add them to the comment list div
     }
