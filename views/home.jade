@@ -3,6 +3,9 @@ extends layout
 block content
   .container
     script(src='js/home.js')
+    script(type='text/javascript').
+        $(document).on("ready", function() { $( "button#tip-send" ).click(function() { sendTip("#{user.username}"); }); })
+
     hr
     h3 Dernières astuces
     .lasttips

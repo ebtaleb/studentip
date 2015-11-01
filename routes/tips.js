@@ -37,20 +37,21 @@ exports.findById = function (req, res) {
         if (err) {
             res.send({'error':'An error has occurred - ' + err});
         } else {
-            console.log('Success: ' + tip._id + " found");
+            //console.log('Success: ' + tip._id + " found");
             res.json(tip);
         }
     });
 };
 
 exports.addTip = function(req, res) {
+    var hostname = req.headers.host;
     var tip = req.body;
     Tips.create(tip, function(err, result) {
         if (err) {
             res.send({'error':'An error has occurred - ' + err});
         } else {
             console.log('Success: ' + result._id + " inserted");
-            res.json({ "url" : result._id, "insertion" : "success"});
+            res.json({ "url" : "http://"+hostname+"/"+result._id, "insertion" : "success"});
         }
     });
 };

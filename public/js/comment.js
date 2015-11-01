@@ -49,7 +49,8 @@ var createCommentForm = function() {
     comment_button_grp.className = "form-group";
 
     comment_button = document.createElement("button");
-    comment_button.className = "btn btn-default";
+    comment_button.className = "btn btn-default add-cmt";
+    comment_button.setAttribute('type',"button");
     comment_button.innerHTML = "Ajouter";
 
     // Add to the comment form
@@ -87,3 +88,27 @@ var addCommentBox = function(comments) {
 
     return newdiv;
 }
+
+var addCommentToTip = function(id, username) {
+    text = $("input.form-control").val();
+    if (text) {
+	    $.ajax({
+		    type: "POST",
+		    url: "api/tips/"+id+"/comments",
+		    data: {'owner': username, 'content': text },
+		    dataType: "json",
+		    success: function(data){
+                alert("comment sent");
+			    $('input.form-control').val('');
+                newcomment = createComment(username, 
+                                           text,
+                                           new Date().toJSON(),
+                                           "http://lorempixel.com/50/50/people/9");
+                $('.commentList').append(newcomment);
+		    }
+	    });
+    } else {
+        alert("empty comment : " + text);
+    }
+}
+

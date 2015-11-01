@@ -25,24 +25,6 @@ router.get('/', function (req, res) {
     res.render('index', { user : req.user });
 });
 
-router.get('/:id', function (req, res) {
-    http.get("http://" + req.headers.host + "/api/tips/" + req.params.id, function(output) {
-        console.log("Got response: " + output.statusCode);
-        str = "";
-        output.on('data', function (chunk) {
-            str += chunk;
-        });
-
-        output.on('end', function () {
-            ok = JSON.parse(str);
-            console.log(ok);
-            res.render('tip', { user : req.user, tip : ok });
-        });
-    }).on('error', function(e) {
-        console.log("Got error: " + e.message);
-    });
-});
-
 router.get('/register', function(req, res) {
     res.render('register', { });
 });
@@ -78,6 +60,23 @@ router.get('/profile', notLoggedIn, function (req, res) {
 router.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
+});
+
+router.get('/:id', function (req, res) {
+    http.get("http://" + req.headers.host + "/api/tips/" + req.params.id, function(output) {
+        console.log("Got response: " + output.statusCode);
+        str = "";
+        output.on('data', function (chunk) {
+            str += chunk;
+        });
+
+        output.on('end', function () {
+            ok = JSON.parse(str);
+            res.render('tip', { user : req.user, tip : ok });
+        });
+    }).on('error', function(e) {
+        console.log("Got error: " + e.message);
+    });
 });
 
 module.exports = router;
