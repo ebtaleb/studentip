@@ -1,3 +1,8 @@
+function parseJsonDate(jsonDate) {
+    var myNewJSDateObj = new Date(jsonDate);
+    return myNewJSDateObj.toLocaleString();
+};
+
 var createComment = function(user, content, date, imgsrc) {
     new_comment = document.createElement("li");
 
@@ -16,7 +21,7 @@ var createComment = function(user, content, date, imgsrc) {
 
     date_span = document.createElement("span");
     date_span.className = "date sub-text";
-    date_span.innerHTML = user + " " + date;
+    date_span.innerHTML = user + " " + parseJsonDate(date);
 
     new_comment.appendChild(comment_picture);
     comment_text.appendChild(comment_content);
@@ -98,7 +103,7 @@ var addCommentToTip = function(id, username) {
 		    data: {'owner': username, 'content': text },
 		    dataType: "json",
 		    success: function(data){
-                alert("comment sent");
+                noty({layout: 'bottom', type: 'success', text: "Commentaire ajouté", timeout : 2000});
 			    $('input.form-control').val('');
                 newcomment = createComment(username, 
                                            text,
@@ -108,7 +113,7 @@ var addCommentToTip = function(id, username) {
 		    }
 	    });
     } else {
-        alert("empty comment : " + text);
+        noty({layout: 'bottom', type: 'error', text: "Erreur : commentaire vide", timeout : 2000});
     }
 }
 

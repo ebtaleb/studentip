@@ -7,12 +7,12 @@ var sendTip = function(username) {
 		    data: {'owner': username, 'content': text },
 		    dataType: "json",
 		    success: function(data){
-                noty({layout: 'bottom', type: 'success', text: "tip sent", timeout : 2000});
+                noty({layout: 'bottom', type: 'success', text: "Astuce crée", timeout : 2000});
                 window.setTimeout( function() {window.location.href = data.url;}, 3000 ); 
 		    }
 	    });
     } else {
-        noty({layout: 'bottom', type: 'error', text: "empty tip", timeout : 2000});
+        noty({layout: 'bottom', type: 'error', text: "Vous n'avez rien entré", timeout : 2000});
     }
 }
 

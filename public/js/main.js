@@ -1,3 +1,7 @@
+function parseJsonDate(jsonDate) {
+    var myNewJSDateObj = new Date(jsonDate);
+    return myNewJSDateObj.toLocaleString();
+};
 
 var createBubble = function(item) {
 
@@ -11,11 +15,10 @@ var createBubble = function(item) {
     newlink.setAttribute("href", "/"+item._id);
     newlink.innerHTML = item.content;
     newquote.appendChild(newlink);
-    //newquote.innerHTML = item.content;
     newdiv.appendChild(newquote);
 
     p_user = document.createElement("p");
-    p_user.innerHTML = item.owner + " - " + item.creation_date;
+    p_user.innerHTML = item.owner + " - " + parseJsonDate(item.creation_date);
     newdiv.appendChild(p_user);
 
     return newdiv;

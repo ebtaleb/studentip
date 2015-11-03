@@ -7,19 +7,17 @@ block content
     var content = tip.content;
     var date = tip.creation_date;
     var tip_id = tip._id;
-
+       
+    $(document).on("ready", function() { $(".comments").append(createBubble(tip)); });
     $(document).on("ready", function() { $(".comments").append(addCommentBox(tip.comments)); });
   script(type='text/javascript', src='js/comment.js')
 
   .comments
+    hr
     if (user)
       script(type='text/javascript').
-        $(document).on("ready", function() { $( ".add-cmt" ).click(function() { alert($("input.form-control").val()); addCommentToTip(tip_id, "#{user.username}"); }); })
+        $(document).on("ready", function() { $( ".add-cmt" ).click(function() { addCommentToTip(tip_id, "#{user.username}"); }); })
 
     if (!user)
       script(type='text/javascript').
         $(document).on("ready", function() { $( ".add-cmt" ).click(function() { alert($("input.form-control").val()); addCommentToTip(tip_id, "Anon"); }); })
-
-    h2 #{tip.owner}
-    h2 #{tip.content}
-    h2 #{tip.creation_date}
