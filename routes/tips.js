@@ -58,11 +58,12 @@ exports.addTip = function(req, res) {
 
 exports.addComment = function(req, res) {
     console.log(req.body);
-    Tips.update({ _id: req.params.id }, { $push : {"comments" : req.body} }, function(err, result) {
+    Tips.findOneAndUpdate({ _id: req.params.id }, { $push : {"comments" : req.body} }, function(err, result) {
         if (err) {
             res.send({'error':'An error has occurred - ' + err});
         } else {
-            res.json({"url" : result._id, "comment_update" : "success"});
+            newcom = result.comments[result.comments.length - 1];
+            res.json({"url" : result._id, "comment_update" : "success", "com" : {"owner" : newcom.owner, "content" : newcom.content, "date" : newcom.creation_date, "tip_id" : result._id}});
         }
     });
 };

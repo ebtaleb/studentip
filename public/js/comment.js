@@ -97,23 +97,28 @@ var addCommentBox = function(comments) {
 var addCommentToTip = function(id, username) {
     text = $("input.form-control").val();
     if (text) {
+        var alert = alert_new_loading("Envoi...");
 	    $.ajax({
 		    type: "POST",
 		    url: "api/tips/"+id+"/comments",
 		    data: {'owner': username, 'content': text },
 		    dataType: "json",
 		    success: function(data){
-                noty({layout: 'bottom', type: 'success', text: "Commentaire ajouté", timeout : 2000});
+                alert.remove();
+                alert_new_success("Commentaire envoyé !");
+                //noty({layout: 'bottom', type: 'success', text: "Commentaire ajouté", timeout : 2000});
 			    $('input.form-control').val('');
                 newcomment = createComment(username, 
                                            text,
                                            new Date().toJSON(),
                                            "http://lorempixel.com/50/50/people/9");
                 $('.commentList').append(newcomment);
+                alert.remove();
 		    }
 	    });
     } else {
-        noty({layout: 'bottom', type: 'error', text: "Erreur : commentaire vide", timeout : 2000});
+        //noty({layout: 'bottom', type: 'error', text: "Erreur : commentaire vide", timeout : 2000});
+        alert_new_error("Erreur : commentaire vide");
     }
 }
 

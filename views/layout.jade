@@ -136,10 +136,11 @@ html.no-js(lang='')
       block content
 
     footer 2015 TPDEV
-  
-    #sendTip-dialog(title='Publier une astuce')
-      textarea#sentTip-input
-      i#sendTip-btn.fa.fa-paper-plane(onclick='sendTip("#{user.username}")')
+    
+    if (user)  
+      #sendTip-dialog(title='Publier une astuce')
+        textarea#sentTip-input
+        i#sendTip-btn.fa.fa-paper-plane(onclick='sendTip("#{user.username}")')
 
 
     //- Dialog connexion
@@ -203,7 +204,10 @@ html.no-js(lang='')
               data: {'owner': "#{user.username}", 'content': comment },
               dataType: "json",
               success: function(data){
-                alert("Commentaire ajouté");
+                //alert("Commentaire ajouté");
+                appendComment(data.com);
+                $("#comment-add-txt" + id).val('');
+                alert_new_success("Commentaire ajouté !");
               }
             });
           }
