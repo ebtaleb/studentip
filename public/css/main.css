@@ -1,7 +1,27 @@
-
-.example-right a {
-  color: #4A42CA !important;
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #ececec;
+  padding: 0;
+  color: #5A5A5A;
 }
+  #page-content {
+    flex: 1;
+    margin-top: 52px;
+  }
+  footer {
+    color: silver;
+    padding: 10px 20px;
+  }
+
+.form-group {
+  margin: 14px;
+}
+
+/*.example-right a {
+  color: #4A42CA !important;
+}*/
 
 .btn-signup {
   background-color: hsl(37, 100%, 60%) !important;
@@ -22,15 +42,86 @@
 
 
 
+/* Send tip */
+#sendTip-open {
+  margin-right: 10px;
+  padding-right: 24px;
+  border-right: 1px solid #9ad9fb;
+}
+#sendTip-dialog {
+  /*border-top: 1px solid #E1E1E1;*/
+  display: flex;
+  align-items: center;
+  margin:4px 0;
+}
+  #sentTip-input {
+    resize: false;
+    border: 1px solid #E1E1E1;
+    flex: 1;
+  }
+  #sendTip-btn {
+    width: 50px;
+    font-size: 24px;
+    text-align: center
+  }
+  #sendTip-btn {
+    color:#0880C1;
+  } 
 
 
 
 
-
-
-
-
-
-
-
-
+/* NAV */
+#menu {
+  background: #0880C1;
+  color: #9ad9fb;
+}
+  #menu a {
+    color: #9ad9fb;
+    -webkit-transition: all .2s linear;
+         -o-transition: all .2s linear;
+            transition: all .2s linear;
+  }
+  #menu a:hover {
+    color: white;
+    -webkit-transition: all .2s linear;
+         -o-transition: all .2s linear;
+            transition: all .2s linear;
+  }
+  #menu > .container {
+    display: flex;
+    align-items: center;
+  }
+  #menu-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+  }
+  .nav-icon {
+    color: #cbebfd;
+    font-size: 28px;
+    -webkit-transition: all .2s linear;
+         -o-transition: all .2s linear;
+            transition: all .2s linear;
+  }
+  .nav-icon:hover {
+    color: white;
+    -webkit-transition: all .2s linear;
+         -o-transition: all .2s linear;
+            transition: all .2s linear;
+  }
+  #register-btn {
+    font-size: 16px;
+    margin-right: 18px;
+    padding-right: 18px;
+    border-right: 2px solid #9ad9fb;
+    font-weight: bold;
+    color: #cbebfd !important;
+  } 
+  #register-btn:hover {
+    color: white !important;
+    text-decoration: none;
+    -webkit-transition: all .2s linear;
+         -o-transition: all .2s linear;
+            transition: all .2s linear;
+  }

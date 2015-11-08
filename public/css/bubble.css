@@ -30,10 +30,13 @@ is to other properties or values in creating the effect */
   color:#000;
   background:#f3961c; /* default background for browsers without gradient support */
   /* css3 */
-  background:-webkit-gradient(linear, 0 0, 0 100%, from(#f9d835), to(#f3961c));
+  background: white;
+  -webkit-box-shadow: 0 .5px 3px 0px #9b9b9b;
+          box-shadow:0 .5px 3px 0px #9b9b9b;
+  /*background:-webkit-gradient(linear, 0 0, 0 100%, from(#f9d835), to(#f3961c));
   background:-moz-linear-gradient(#f9d835, #f3961c);
   background:-o-linear-gradient(#f9d835, #f3961c);
-  background:linear-gradient(#f9d835, #f3961c);
+  background:linear-gradient(#f9d835, #f3961c);*/
   -webkit-border-radius:10px;
   -moz-border-radius:10px;
   border-radius:10px;
@@ -555,12 +558,15 @@ is to other properties or values in creating the effect */
   padding:15px 30px;
   margin:0;
   color:#fff;
-  background:#5a8f00; /* default background for browsers without gradient support */
+  background: white;
+  -webkit-box-shadow: 0 .5px 3px 0px #9b9b9b;
+          box-shadow:0 .5px 3px 0px #9b9b9b;
+  /*background:#5a8f00;*/
   /* css3 */
-  background:-webkit-gradient(linear, 0 0, 0 100%, from(#b8db29), to(#5a8f00));
+  /*background:-webkit-gradient(linear, 0 0, 0 100%, from(#b8db29), to(#5a8f00));
   background:-moz-linear-gradient(#b8db29, #5a8f00);
   background:-o-linear-gradient(#b8db29, #5a8f00);
-  background:linear-gradient(#b8db29, #5a8f00);
+  background:linear-gradient(#b8db29, #5a8f00);*/
   -webkit-border-radius:10px;
   -moz-border-radius:10px;
   border-radius:10px;

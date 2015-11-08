@@ -7,43 +7,204 @@ html.no-js(lang='')
     meta(name='description', content='')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='css/bootstrap.min.css')
-    style.
-      body {
-      padding-top: 50px;
-      padding-bottom: 20px;
-      }
-    link(rel='stylesheet', href='css/bootstrap-theme.min.css')
-    link(rel='stylesheet', href='css/main.css')
-    link(rel='stylesheet', href='css/bubble.css')
+    //- link(rel='stylesheet', href='css/bootstrap-theme.min.css')
+    link(rel='stylesheet', href='css/font-awesome.min.css')  
+    //- link(rel='stylesheet', href='css/bubble.css')
     link(rel='stylesheet', href='css/comment.css')
-    script(src='js/vendor/modernizr-2.8.3.min.js')
-    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
-    script.
-      window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\\/script>')
-    script(src='js/vendor/bootstrap.min.js')
-    script(src="js/noty/packaged/jquery.noty.packaged.min.js")
+    link(rel='stylesheet', href='css/tip.css')
+    link(rel='stylesheet', href='css/main.css')
+    link(rel='stylesheet', href='css/jquery/dialog.css')
+    link(rel='stylesheet', href='css/alert.css')
+    //- script(src='js/vendor/modernizr-2.8.3.min.js')
+    script(src='js/vendor/jquery-2.1.4.js')
+    script(src='js/vendor/jquery-ui.js')
+    //- script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
+    //- script.
+    //-   window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\\/script>')
+    //- script(src='js/vendor/bootstrap.min.js')
+    //- script(src="js/noty/packaged/jquery.noty.packaged.min.js")
     script(src='js/main.js')
+    script.
+      //- Dialog default options
+      $.extend($.ui.dialog.prototype.options, {
+            autoOpen: false,
+            modal: true,
+            resizable: false,
+            width: 500,
+            show: {effect: 'fade', duration: 200},
+        });
+  
   body
-    nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+    nav#menu
       .container
-        .navbar-header
-          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          a.navbar-brand(href='/') Studentip
-        #navbar.navbar-collapse.collapse
+        a.navbar-brand(href='/') Studentip
+        
+        #menu-actions
           if (!user)
-            form.navbar-form.navbar-right(role='form', action="/login", method="post")
-              .form-group
-                input.form-control(type='text', name="username", placeholder='Identifiant')
-              .form-group
-                input.form-control(type='password', name="password", placeholder='Mot de passe')
-              button.btn.btn-success(type='submit') Se connecter
-          if (user)
-            .navbar-right
-              a.navbar-brand #{user.username}
-              a.navbar-brand(href="/logout") Déconnexion
+            a#register-btn(href='/register', role='button') S&apos;inscrire
+            i#btn-sigin-form.fa.fa-sign-in.nav-icon 
 
-    block content
+            #sigin-form(title='Connexion')  
+              form.navbar-form.navbar-right(role='form', action="/login", method="post")
+                
+                .form-group
+                  input.form-control(type='text', name="username", placeholder='Identifiant')
+                
+                .form-group
+                  input.form-control(type='password', name="password", placeholder='Mot de passe')
+                
+                .form-group
+                  button.btn.btn-success(type='submit') Se connecter
+          
+          if (user)
+            i#sendTip-open.fa.fa-paper-plane.nav-icon 
+            a.navbar-brand(href="/home") #{user.username}
+            //- a.navbar-brand(href="/logout") Déconnexion
+            a(href="/logout")
+              i.fa.fa-power-off.nav-icon
+
+    //- Alerts
+    #alert-container
+
+    script.
+      var alert_container = $('#alert-container');
+
+      function alert_new(type, message)
+      {
+        var alert = 
+          $('<div>')
+            .addClass('alert')
+            .addClass(type);
+            
+        var alert_content = 
+          $('<div>')
+            .addClass('alert-content')
+            .text(message);
+            
+        var alert_close = 
+          $('<i>')
+            .addClass('alert-close');
+            
+        alert.append(alert_content);
+        alert.append(alert_close);
+        alert_container.append(alert);
+        
+        alert.delay(3500).fadeOut(7000);
+        
+        alert_close.click(function() {
+          $(this).closest('.alert').remove();
+        });
+        
+        alert.hover(function() {
+          alert.stop();
+          alert.fadeIn(200);
+        });
+        
+        alert.mouseleave(function() {
+          alert.delay(1000).fadeOut(6000);
+        });
+        
+        return alert;
+      }
+
+
+      function alert_new_error(message)
+      {
+        return alert_new('error', message);
+      }
+
+
+      function alert_new_success(message)
+      {
+        return alert_new('success', message);
+      }
+
+
+      function alert_new_info(message)
+      {
+        return alert_new('info', message);
+      }
+
+
+      function alert_new_loading(message)
+      {
+        return alert_new('loading', message);
+      }
+    //-----------------
+
+    #page-content
+      block content
+
+    footer 2015 TPDEV
+  
+    #sendTip-dialog(title='Publier une astuce')
+      textarea#sentTip-input
+      i#sendTip-btn.fa.fa-paper-plane(onclick='sendTip("#{user.username}")')
+
+
+    //- Dialog connexion
+    script(type='text/javascript').
+      $(function() {
+        $("#sigin-form").dialog({
+          width: 300,
+          buttons:
+          {
+            ' ': function() {
+            },
+            
+            '': function() {
+              $(this).dialog('close');
+            }
+          }
+        });
+
+        $("#btn-sigin-form").click(function(){
+          $("#sigin-form").dialog("open");
+        });
+      });
+
+
+    
+    //- Dialog send tip
+    script.
+      $(function() {
+        $("#sendTip-dialog").dialog({
+            width: 450,
+            buttons:
+            {
+              ' ': function() {
+              },
+              
+              '': function() {
+                $(this).dialog('close');
+              }
+            }
+          });
+
+          $("#sendTip-open").click(function(){
+            $("#sendTip-dialog").dialog("open");
+          });
+      });
+
+
+    //- Hack
+    if (!user)
+      input#user-offline(type='hidden' value='1')
+
+    //- Send comment
+    if (user)
+      script.
+        function sendComment(comment, id) {
+        console.log("---" + id);
+          if(comment.length > 0) {
+            $.ajax({
+              type: "POST",
+              url: "api/tips/"+id+"/comments",
+              data: {'owner': "#{user.username}", 'content': comment },
+              dataType: "json",
+              success: function(data){
+                alert("Commentaire ajouté");
+              }
+            });
+          }
+        }

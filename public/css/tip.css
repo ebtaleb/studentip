@@ -1,0 +1,133 @@
+.tip {
+	
+}
+.tip-container {
+	display: flex;
+	flex-direction: row;
+	padding: 6px;
+  	color: #5A5A5A;
+	background: white;
+	/*display: flex;
+	align-items: center;*/
+	margin-bottom: 10px;
+  	-webkit-box-shadow: 0 .5px 3px 0px #9b9b9b;
+          box-shadow:0 .5px 3px 0px #9b9b9b;
+}
+	.tip-img {
+		background: #A9F5F2;
+		color: #0174DF;
+		border-radius: 50%;
+		height: 50px;
+		width: 54px;
+		font-size: 25px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		/*border: 1px solid #01DFD7;*/
+		margin: 0 15px 0 10px;
+	}
+	.tip-content {
+		width: 100%;
+	}
+		.tip-head {
+			display: flex;
+			margin-bottom: 6px;
+		}
+			.tip-author {
+				flex: 1;
+				color: #0880C1;
+				font-size: 16px;
+			}
+			.tip-date {
+				margin-left: auto;
+				color: silver;
+			}
+		.tip-actions {
+			padding: 4px 0;
+			margin: 4px 0;
+			border-top: 1px solid #E1E1E1;
+			color: silver;
+			font-size: 15px;
+		}
+
+.tip-comments {
+	color: #5A5A5A;
+	margin-top: -10px;
+	margin-bottom: 10px;
+	background: #FAFAFA;
+    -webkit-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    transition: all .2s ease;
+    -webkit-box-shadow: 0 1px 3px 0 #9b9b9b;
+    box-shadow: 0 1px 3px 0 #9b9b9b;
+    overflow: hidden;
+    width: 100%;
+    padding: 8px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+	.tip-comment {
+		border-bottom: 1px solid #E1E1E1;
+		display: flex;
+		flex-direction: row;
+		font-size: 13px;
+		padding: 4px;
+	}
+	.tip-com-img {
+		background: #A9F5F2;
+		color: #0174DF;
+		border-radius: 50%;
+		height: 42px;
+		width: 45px;
+		font-size: 22px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		/*border: 1px solid #01DFD7;*/
+		margin: 0 15px 0 10px;
+	}
+	.tip-com-content {
+		width: 100%;
+	}
+		.tip-com-head {
+			display: flex;
+			margin-bottom: 6px;
+		}
+			.tip-com-author {
+				flex: 1;
+				color: #0880C1;
+				font-size: 14px;
+			}
+			.tip-com-date {
+				margin-left: auto;
+				color: silver;
+			}
+		.tip-com-actions {
+			padding: 4px 0;
+			margin: 4px 0;
+			border-top: 1px solid #E1E1E1;
+			color: silver;
+			font-size: 15px;
+		}
+
+
+/* Add comment */
+.comment-add {
+	/*border-top: 1px solid #E1E1E1;*/
+	display: flex;
+	align-items: center;
+	margin:4px 0;
+}
+	.comment-add-txt {
+		resize: false;
+		border: 1px solid #E1E1E1;
+		flex: 1;
+	}
+	.comment-add > .fa-paper-plane {
+		width: 50px;
+		font-size: 24px;
+		text-align: center
+	}
+	.comment-add > .fa-paper-plane:hover {
+		color:#0880C1;
+	}	

@@ -1,0 +1,59 @@
+#alert-container {
+    margin-left: 20px;
+    flex-direction: column;
+    width: 300px;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    z-index: 10;
+    margin-bottom: 5%
+}
+.alert {
+    color: #e6e6e6;
+    margin: 6px;
+    border-radius: 3px;
+    padding: 10px 4px 10px 12px;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex
+}
+.alert:before {
+    font-family: 'FontAwesome';
+    font-style: normal;
+    margin-right: 10px;
+    font-size: 24px
+}
+.alert.error:before {
+    content: "\f06a";
+    color: #e60000
+}
+.alert.success:before {
+    content: "\f058";
+    color: #00cf00
+}
+.alert.info:before {
+    content: "\f05a";
+    color: #69c6f9
+}
+.alert.loading:before {
+    content: "\f110";
+    color: #69c6f9;
+    -webkit-animation: fa-spin 1s infinite steps(8);
+    animation: fa-spin 1s infinite steps(8)
+}
+.alert-content {
+    flex: 1
+}
+i.alert-close {
+    color: #e6e6e6
+}
+i.alert-close:before {
+    font-family: 'FontAwesome';
+    font-style: normal;
+    content: "\f00d";
+    margin-right: 6px;
+    text-align: right;
+    -webkit-text-stroke: 1px #464646
+}
+i.alert-close:hover {
+    color: #fff !important
+}

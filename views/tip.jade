@@ -16,8 +16,17 @@ block content
     hr
     if (user)
       script(type='text/javascript').
-        $(document).on("ready", function() { $( ".add-cmt" ).click(function() { addCommentToTip(tip_id, "#{user.username}"); }); })
+        $(document).on("ready", function() { 
+          $( ".add-cmt" ).click(function() { 
+            addCommentToTip(tip_id, "#{user.username}");
+          });
+        });
 
     if (!user)
       script(type='text/javascript').
-        $(document).on("ready", function() { $( ".add-cmt" ).click(function() { alert($("input.form-control").val()); addCommentToTip(tip_id, "Anon"); }); })
+        $(document).on("ready", function() { 
+          $( ".add-cmt" ).click(function() { 
+            alert($("input.form-control").val()); 
+            addCommentToTip(tip_id, "Anon"); 
+          });
+        })

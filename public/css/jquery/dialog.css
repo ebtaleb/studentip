@@ -1,0 +1,78 @@
+.ui-widget-overlay {
+    background: rgba(25, 25, 34, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0
+}
+.ui-front {
+    z-index: 1
+}
+.ui-dialog {
+    background: #fff;
+    padding: 8px 15px 10px 15px;
+    -webkit-box-shadow: 2px 2px 5px 1px #424242;
+    box-shadow: 2px 2px 5px 1px #424242;
+    border-color: #c0c0c0;
+    position: absolute
+}
+.ui-dialog-titlebar-close {
+    display: none
+}
+.ui-dialog-titlebar {
+    border-bottom: 1px solid #e1e1e1;
+    padding: 0 0 5px 10px;
+    margin: 0 -15px 20px -15px
+}
+.ui-dialog-title {
+    font-size: 20px;
+    text-transform: uppercase
+}
+.ui-dialog-content {
+    min-height: auto !important
+}
+.ui-dialog-buttonpane {
+    position: absolute;
+    top: 6px;
+    right: 0
+}
+.ui-button {
+    background: none;
+    border: 0;
+    color: #5a5a5a;
+    -webkit-transition: all .1s linear;
+    -o-transition: all .1s linear;
+    transition: all .1s linear;
+    font-family: 'FontAwesome'
+}
+.ui-button:hover {
+    color: #0880c1;
+    transform: scale(1.2);
+    -webkit-transition: all .1s linear;
+    -o-transition: all .1s linear;
+    transition: all .1s linear
+}
+.ui-dialog-buttonset {
+    margin-right: 10px
+}
+.ui-dialog-buttonset>.ui-button:first-child:before {
+    -webkit-text-stroke: 1px #fff;
+    content: "\f00c";
+    font-size: 22px;
+    display: none;
+}
+.ui-dialog-buttonset>.ui-button:before {
+    -webkit-text-stroke: 1px #fff;
+    content: "\f00d";
+    font-size: 22px
+}
+.ui-dialog-btn-close {
+    float: right;
+    margin-right: 12px
+}
+.ui-dialog-btn-close:before {
+    -webkit-text-stroke: 1px #fff;
+    content: "\f00d";
+    font-size: 22px
+}
