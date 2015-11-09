@@ -59,7 +59,7 @@ html.no-js(lang='')
           
           if (user)
             i#sendTip-open.fa.fa-paper-plane.nav-icon 
-            a.navbar-brand(href="/home") #{user.username}
+            a.navbar-brand(href="#") #{user.username}
             //- a.navbar-brand(href="/logout") Déconnexion
             a(href="/logout")
               i.fa.fa-power-off.nav-icon
@@ -152,7 +152,6 @@ html.no-js(lang='')
         .form-group
           input.form-control(type='password', name="password", placeholder='Password')
         button#btn-register-submit.btn.btn-default(type='submit') Submit
-
 
     //- Dialog connexion
     script(type='text/javascript').
