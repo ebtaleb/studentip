@@ -8,8 +8,8 @@ block content
     var date = tip.creation_date;
     var tip_id = tip._id;
        
-    $(document).on("ready", function() { $(".comments").append(createBubble(tip)); });
-    $(document).on("ready", function() { $(".comments").append(addCommentBox(tip.comments)); });
+    $(document).on("ready", function() { $(".comments").append(createBubble(tip)); $("#tip-comments" + tip_id).toggle()});
+    //$(document).on("ready", function() { $(".comments").append(addCommentBox(tip.comments)); });
   script(type='text/javascript', src='js/comment.js')
 
   .comments

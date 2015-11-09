@@ -15,11 +15,11 @@ var createBubble = function(item) {
             "<div class='tip-img'><i class='fa fa-user'></i></div>" +
             "<div class='tip-content'>" +
                 "<div class='tip-head'>" +
-                    "<div class='tip-author'>" + item.owner + "</div>" +
+                    "<div class='tip-author'>" + "<a href='" + location.origin + "/"  + item._id + "'>" + item.content + "</a>" + "</div>" +
                     "<div class='tip-date'>" + parseJsonDate(item.creation_date) + "</div>" +
                 "</div>" +
                 "<div class='tip-txt'>" +
-                    item.content +
+                     "par "+ item.owner +
                 "</div>" +
                 "<div class='tip-actions'>" +
                     "<i class='fa fa-comment' onclick=\"$('#tip-comments" + item._id +"').toggle()\"></i> " + item.comments.length +
