@@ -8,7 +8,7 @@ var createBubble = function(item) {
     newdiv = document.createElement("div");
     newdiv.className = "tip";
 
-    // Create tip
+    // Draw tip
     newdiv.innerHTML = 
         // "<a href='/" + item._id + "'>" +
         "<div class='tip-container'>" +
@@ -28,37 +28,50 @@ var createBubble = function(item) {
         "</div>";
         // "</a>";
 
-    // Prepare comments
-    var comments = "";
 
+    var comments = "";
     for(var i in item.comments) {
-       comments += 
-            "<div class='tip-comment'>" +
-                "<div class='tip-com-img'><i class='fa fa-user'></i></div>" +
-                "<div class='tip-com-content'>" +
-                    "<div class='tip-com-head'>" +
-                        "<div class='tip-com-author'>" + item.comments[i].owner + "</div>" +
-                        "<div class='tip-com-date'>" + parseJsonDate(item.comments[i].creation_date) + "</div>" +
-                    "</div>" + 
-                    "<div class='tip-com-txt'>" +
-                        item.comments[i].content +
-                    "</div>" +
-                "</div>" +  
-            "</div>";
+        comments += drawComment(item.comments[i].owner, item.comments[i].creation_date, item.comments[i].content);
     }
 
-    // Add comments under tip
+    // Draw form to add comment
     newdiv.innerHTML += 
         "<div id='tip-comments" + item._id + "' class='tip-comments' style='display:none'>" +
-            comments + 
-            "<div class='comment-add'>" +
+            comments +
+            "<div id='comment-add" + item._id +"' class='comment-add'>" +
                 "<textarea id='comment-add-txt" + item._id + "' class='comment-add-txt'></textarea>" +
                 "<i class='fa fa-paper-plane' onclick=\"sendComment($('#comment-add-txt" + item._id + "').val(), '" + item._id+"')\"></i>" +
             "</div>" + 
         "</div>";
 
+    // Draw comments
+    // for(var i in item.comments) {
+    //     addCommentToTip(item._id, item.comments[i].owner, item.comments[i].creation_date, item.comments[i].content);
+    // }
+
     return newdiv;
 };
+
+
+var drawComment = function(owner, date, content)
+{
+    var comment =
+        "<div class='tip-comment'>" +
+            "<div class='tip-com-img'><i class='fa fa-user'></i></div>" +
+            "<div class='tip-com-content'>" +
+                "<div class='tip-com-head'>" +
+                    "<div class='tip-com-author'>" + owner + "</div>" +
+                    "<div class='tip-com-date'>" + parseJsonDate(date) + "</div>" +
+                "</div>" + 
+                "<div class='tip-com-txt'>" +
+                    content +
+                "</div>" +
+            "</div>" +
+        "</div>"
+    ;
+
+    return comment;
+}
 
 $(document).ready(function () {
     $.getJSON("api/tips")
@@ -74,7 +87,7 @@ $(document).ready(function () {
 });
 
 var sendTip = function(username) {
-    text = $("#sentTip-input").val();
+    var text = $("#sentTip-input").val();
     if (text) {
         var alert = alert_new_loading("Envoi...");
         $.ajax({
@@ -84,10 +97,13 @@ var sendTip = function(username) {
             dataType: "json",
             success: function(data){
                 // noty({layout: 'bottom', type: 'success', text: "Astuce crée", timeout : 2000});
-                window.setTimeout( function() {window.location.href = data.url;}, 3000 ); 
+                // window.setTimeout( function() {window.location.href = data.url;}, 3000 ); 
                 alert.remove();
                 alert_new_success("Envoyé !");
                 $("#sentTip-input").val("");
+                $("#sendTip-dialog").dialog("close");
+                var comment = {"owner" : username, "creation_date": new Date(), "content": text, "comments": []};
+                $(".new-tips").prepend(createBubble(comment));
             }
         });
     } else {

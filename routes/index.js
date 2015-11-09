@@ -9,13 +9,14 @@ function notLoggedIn(req, res, next) {
     if (req.user) {
         next();
     } else {
-        res.redirect('/login');
+        res.redirect('/');
     }
 }
 
 function loggedIn(req, res, next) {
     if (req.user) {
-        res.redirect('/home');
+        //res.redirect('/home');
+        res.redirect('/');
     } else {
         next();
     }
@@ -36,21 +37,23 @@ router.post('/register', function(req, res) {
         }
 
         passport.authenticate('local')(req, res, function () {
-            res.redirect('/home');
+            res.redirect('/');
         });
     });
 });
 
 router.get('/login', loggedIn, function(req, res) {
-    res.render('login', { user : req.user });
+    res.render('/', { user : req.user });
 });
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
-    res.redirect('/home');
+    // res.redirect('/home');
+    res.redirect('/');
 });
 
 router.get('/home', notLoggedIn, function (req, res) {
-    res.render('home', { user : req.user });
+    // res.render('home', { user : req.user });
+    res.redirect('/', { user : req.user });
 });
 
 router.get('/profile', notLoggedIn, function (req, res) {

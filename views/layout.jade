@@ -41,7 +41,8 @@ html.no-js(lang='')
         
         #menu-actions
           if (!user)
-            a#register-btn(href='/register', role='button') S&apos;inscrire
+            a#register-btn
+              | S&apos;inscrire
             i#btn-sigin-form.fa.fa-sign-in.nav-icon 
 
             #sigin-form(title='Connexion')  
@@ -135,11 +136,22 @@ html.no-js(lang='')
     #page-content
       block content
 
-    footer 2015 TPDEV
+    footer 
+      .container
+        <strong>Studentip</strong><br>Réalisation dans le cadre de l'UE TPDEV, année 2015
   
     #sendTip-dialog(title='Publier une astuce')
       textarea#sentTip-input
-      i#sendTip-btn.fa.fa-paper-plane(onclick='sendTip("#{user.username}")')
+      if(user) 
+        i#sendTip-btn.fa.fa-paper-plane(onclick='sendTip("#{user.username}")')
+
+    #register-form(title='Inscription')
+      form(role='form', action="/register",method="post")
+        .form-group
+            input.form-control(type='text', name="username", placeholder='Enter Username')
+        .form-group
+          input.form-control(type='password', name="password", placeholder='Password')
+        button#btn-register-submit.btn.btn-default(type='submit') Submit
 
 
     //- Dialog connexion
@@ -164,6 +176,24 @@ html.no-js(lang='')
       });
 
 
+    //- Register Dialog 
+    script.
+      $("#register-form").dialog({
+        width: 300,
+        buttons:
+        {
+          ' ': function() {
+          },
+          
+          '': function() {
+            $(this).dialog('close');
+          }
+        }
+      });
+
+      $("#register-btn").click(function(){
+        $("#register-form").dialog("open");
+      });
     
     //- Dialog send tip
     script.
@@ -195,7 +225,7 @@ html.no-js(lang='')
     if (user)
       script.
         function sendComment(comment, id) {
-        console.log("---" + id);
+          var com = comment
           if(comment.length > 0) {
             $.ajax({
               type: "POST",
@@ -203,7 +233,10 @@ html.no-js(lang='')
               data: {'owner': "#{user.username}", 'content': comment },
               dataType: "json",
               success: function(data){
-                alert("Commentaire ajouté");
+                alert_new_success("Commentaire ajouté");
+                var comment = drawComment("#{user.username}", new Date(), com)
+                $(comment).insertBefore("#comment-add" + id);
+                $("#comment-add-txt" + id).val("");
               }
             });
           }
